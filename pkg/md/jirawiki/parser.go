@@ -159,8 +159,8 @@ func secondPass(lines []string) string {
 					if lineNum >= len(lines) {
 						break out
 					}
-				case typeTagReferenceLink:
-					end = token.handleReferenceLink(runes, &out)
+				// case typeTagReferenceLink:
+				// 	end = token.handleReferenceLink(runes, &out)
 				case typeTagTable:
 					end = token.handleTable(runes, &out)
 				case typeTagOther:
