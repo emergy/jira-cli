@@ -67,7 +67,7 @@ func (l *IssueList) Render() error {
 				iss := Issue{
 					Server:  l.Server,
 					Data:    i.(*jira.Issue),
-					Options: IssueOption{NumComments: 1},
+					Options: IssueOption{NumComments: 100},
 				}
 				return iss.RenderedOut(renderer)
 			}
