@@ -1,0 +1,32 @@
+{
+    "name": "JiraCLI",
+    "build": {
+        "dockerfile": "./Dockerfile",
+        "context": "."
+    },
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "ms-azuretools.vscode-docker",
+                "ms-vscode.makefile-tools"
+            ]
+        }
+    },
+    "mounts": [
+        "source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind",
+        "source=${localEnv:HOME}/.config/.jira,target=/home/vscode/.config/.jira,type=bind",
+        "source=${localEnv:HOME}/.bashrc.d,target=/home/vscode/.bashrc.d,type=bind",
+        "source=/usr/local/bin,target=/target,type=bind"
+    ],
+    // https://containers.dev/features
+    "features": {
+        "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {},
+        "ghcr.io/guiyomh/features/vim:0": {},
+        "ghcr.io/EliiseS/devcontainer-features/bash-profile:1": {
+            "command": "source ~/.bashrc.d/jira"
+        }
+    },
+    "containerEnv": {
+        "JIRA_API_TOKEN": "${localEnv:JIRA_API_TOKEN}"
+    }
+}
