@@ -62,3 +62,6 @@ clean:
 
 distclean:
 	go clean -x -cache -testcache -modcache ./...
+
+deploy: deps install
+	sudo /usr/bin/cp -f /go/bin/jira /target/jira
