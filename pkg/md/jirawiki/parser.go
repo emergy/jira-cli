@@ -371,6 +371,10 @@ type Token struct {
 }
 
 func (t *Token) handleTextEffects(runes []rune, out *strings.Builder) int {
+	if t.startIdx < 0 || t.endIdx >= len(runes) || t.startIdx >= t.endIdx {
+		return max(0, min(t.startIdx, len(runes)-1))
+	}
+
 	word := string(runes[t.startIdx+1 : t.endIdx])
 	effectChar := string(runes[t.startIdx])
 	effectReplacement, exists := replacements[effectChar]
@@ -385,6 +389,20 @@ func (t *Token) handleTextEffects(runes []rune, out *strings.Builder) int {
 	}
 
 	return t.endIdx
+}
+
+func min(a, b int) int {
+	if a < b {
+		return a
+	}
+	return b
+}
+
+func max(a, b int) int {
+	if a > b {
+		return a
+	}
+	return b
 }
 
 func (t *Token) handleHeadings(runes []rune, out *strings.Builder) int {
